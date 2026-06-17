@@ -12,10 +12,10 @@ const codes = [
 ];
 
 const pottySchedule = [
-  { time: "9:30 AM - 11 AM", activity: "They are used to being let out around this time in the morning." },
+  { time: "around 10:00 AM", activity: "They are used to being let out around this time in the morning." },
   { time: "around 3:00 PM", activity: "Seems like a big gap but they are used to it." },
-  { time: "6:30 PM*", activity: "Honestly they are probably fine to skip this but if they seem ancy, go for it." },
-  { time: "9:30 PM", activity: "One last time before bed." },
+  { time: "around 6:30 PM*", activity: "Honestly they are probably fine to skip this but if they seem ancy, go for it." },
+  { time: "around 9:30 PM", activity: "One last time before bed." },
 ];
 
 const feedingSchedule = [
@@ -27,7 +27,7 @@ const feedingSchedule = [
   {
     time: "6:00 PM",
     meal: "Dinner",
-    details: "Same deal.",
+    details: "Same everything as lunch/breakfast.",
   },
 ];
 
@@ -41,7 +41,7 @@ const feedingNotes = [
 
 <Layout title="Important Stuff" subtitle="Honestly the only page that matters">
   <section class="hero">
-    <span class="hero-badge">Bodie & Quill</span>
+    <span class="hero-badge">Thank you for taking care of our dogs!</span>
     <h2 class="hero-title">Keep the <u>gates closed</u>!</h2>
     <p class="hero-sub">
        Their legs are bothering them right now.
@@ -67,8 +67,9 @@ const feedingNotes = [
     }
   </div>
 
-  <h2 class="section-title"><i class="fa-solid fa-toilet"></i> Potty Times (Take them <u>1 at a time</u>!)</h2>
+  <h2 class="section-title"><i class="fa-solid fa-toilet"></i> Potty Times</h2>
   <div class="card">
+    <p>Take them out <u>1 at a time</u>! (they can get WAY too crazy together outside)</p>
     <ul class="clean schedule">
       {
         pottySchedule.map((slot) => (

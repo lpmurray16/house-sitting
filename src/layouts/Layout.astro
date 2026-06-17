@@ -52,7 +52,6 @@ const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
     <main>
       <div class="page-heading">
         <h1>{title}</h1>
-        {subtitle && <p class="subtitle">{subtitle}</p>}
       </div>
       <slot />
     </main>
@@ -67,8 +66,8 @@ const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
         --card: #211c19;
         --ink: #f3ede7;
         --muted: #a39a92;
-        --accent: #ff3b52;
-        --accent-dark: #c20020;
+        --accent: #e0606e;
+        --accent-dark: #a83847;
         --green: #3fae50;
         --gold: #f2a900;
         --black: #0c0a09;
@@ -136,7 +135,6 @@ const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
       }
 
       .brand .pepper {
-        font-family: "Montserrat", sans-serif;
         transform: rotate(-12deg);
         display: inline-block;
       }
@@ -178,19 +176,13 @@ const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
       }
 
       .page-heading {
-        margin-bottom: 1.75rem;
-        background: var(--accent);
-        color: #fff;
-        padding: 1.5rem 1.75rem;
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        border-bottom: 5px solid var(--accent-dark);
+        margin-bottom: 1.5rem;
       }
 
       .page-heading h1 {
-        font-size: 2.6rem;
-        margin: 0 0 0.25rem;
-        color: #fff;
+        font-size: 1.9rem;
+        margin: 0;
+        color: var(--ink);
       }
 
       .subtitle {
