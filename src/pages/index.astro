@@ -1,0 +1,236 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const home = {
+  welcome:
+    "Thanks for watching the house and the dogs :) I would just say watch your food and snacks because the dogs WILL try to steal them.",
+};
+
+const codes = [
+  { icon: "fa-door-closed", label: "Front Door", code: "1524", extra: "top big button locks it behind you" },
+  { icon: "fa-car", label: "Garage", code: "1815", extra: "might need to try multiple times" },
+];
+
+const pottySchedule = [
+  { time: "9:30 AM - 11 AM", activity: "They are used to being let out around this time in the morning." },
+  { time: "around 3:00 PM", activity: "Seems like a big gap but they are used to it." },
+  { time: "6:30 PM*", activity: "Honestly they are probably fine to skip this but if they seem ancy, go for it." },
+  { time: "9:30 PM", activity: "One last time before bed." },
+];
+
+const feedingSchedule = [
+  {
+    time: "12:30 PM",
+    meal: "Lunch/Breakfast",
+    details: "3/4 cup of dry dog food for each dog. One teaspoon of powdered peanut butter mixed with a little water for flavor (in each)",
+  },
+  {
+    time: "6:00 PM",
+    meal: "Dinner",
+    details: "Same deal.",
+  },
+];
+
+const feedingNotes = [
+  "There should be a <strong>1/2 cup scoop</strong> and <strong>1/3 cup scoop</strong> in dry food bin, one full scoop of each equals 3/4 cup total, for each dog 2x a day, see schedule above.",
+  "Water bowl's by the back door, just top it off whenever you see it low.",
+  "Trying to limit treats, because they are so fat and need to lose weight BAD.",
+  "Feed them with some distance between them. Bodie will def try and eat Quill's too."
+];
+---
+
+<Layout title="Important Stuff" subtitle="Honestly the only page that matters">
+  <section class="hero">
+    <span class="hero-badge">Bodie & Quill</span>
+    <h2 class="hero-title">Keep the <u>gates closed</u>!</h2>
+    <p class="hero-sub">
+       Their legs are bothering them right now.
+    </p>
+  </section>
+
+  <div class="card welcome">
+    <p>{home.welcome}</p>
+  </div>
+
+  <h2 class="section-title"><i class="fa-solid fa-key"></i> Entry Codes</h2>
+  <div class="codes">
+    {
+      codes.map((entry) => (
+        <div class="card code-card">
+          <span class="code-label">
+            <i class={`fa-solid ${entry.icon}`} /> {entry.label}
+          </span>
+          <span class="code-value">{entry.code}</span>
+          <p>{entry.extra}</p>
+        </div>
+      ))
+    }
+  </div>
+
+  <h2 class="section-title"><i class="fa-solid fa-toilet"></i> Potty Times (Take them <u>1 at a time</u>!)</h2>
+  <div class="card">
+    <ul class="clean schedule">
+      {
+        pottySchedule.map((slot) => (
+          <li class="slot">
+            <span class="time">{slot.time}</span>
+            <span class="detail">{slot.activity}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <h2 class="section-title"><i class="fa-solid fa-utensils"></i> Feeding Times</h2>
+  <div class="meals">
+    {
+      feedingSchedule.map((meal) => (
+        <div class="card meal-card">
+          <div class="meal-head">
+            <span class="meal-name">{meal.meal}</span>
+            <span class="meal-time">{meal.time}</span>
+          </div>
+          <p class="meal-details">{meal.details}</p>
+        </div>
+      ))
+    }
+  </div>
+
+  <h2 class="section-title"><i class="fa-solid fa-clipboard"></i> Feeding Notes</h2>
+  <div class="card">
+    <ul class="clean">
+      {feedingNotes.map((note) => <li set:html={note} />)}
+    </ul>
+  </div>
+</Layout>
+
+<style>
+  .welcome p {
+    margin: 0;
+    font-size: 1.05rem;
+  }
+
+  .codes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .code-card {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    text-align: center;
+  }
+
+  .code-label {
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  .code-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    font-family: "Consolas", monospace;
+  }
+
+  .schedule .slot {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .time {
+    font-weight: 800;
+    color: var(--accent);
+    min-width: 90px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .detail {
+    flex: 1;
+  }
+
+  .meals {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .meal-card {
+    margin-bottom: 0;
+  }
+
+  .meal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+  }
+
+  .meal-name {
+    font-weight: 800;
+    font-size: 1.15rem;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 2.25rem 1.75rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+    border-bottom: 5px solid #7d0016;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: #1b1b1b;
+    font-weight: 800;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    margin-bottom: 0.85rem;
+  }
+
+  .hero-title {
+    margin: 0 0 0.4rem;
+    font-size: 2.4rem;
+    color: #fff;
+  }
+
+  .hero-sub {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .meal-time {
+    background: var(--gold);
+    color: #1b1b1b;
+    padding: 0.15rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .meal-details {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  @media (max-width: 600px) {
+    .meals,
+    .codes {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,71 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const emergency = {
+  owners: [
+    { name: "Logan", phone: "815-527-19777", note: "Call or text us anytime — seriously!" },
+    { name: "Logan's Sister", phone: "847-894-9498", note: "Try this one if you can't reach either of us." },
+    { name: "Courtney", phone: "", note: "JK you should have this one already lol" },
+  ],
+};
+---
+
+<Layout title="Just In Case" subtitle="Probably won't need these, but here they are if you do.">
+  <h2 class="section-title"><i class="fa-solid fa-hand"></i> Us</h2>
+  {
+    emergency.owners.map((person) => (
+      <div class="card contact">
+        <div class="info">
+          <strong>{person.name}</strong>
+          <span class="note">{person.note}</span>
+        </div>
+        <a class="call" href={`tel:${person.phone.replace(/[^0-9+]/g, "")}`}>
+          <i class="fa-solid fa-phone"></i> {person.phone}
+        </a>
+      </div>
+    ))
+  }
+</Layout>
+
+<style>
+  .contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .info strong {
+    font-size: 1.1rem;
+  }
+
+  .note {
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .call {
+    background: var(--green);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .urgent {
+    border-color: var(--accent);
+    background: #fff6f3;
+  }
+
+  .urgent .call {
+    background: var(--accent-dark);
+  }
+</style>

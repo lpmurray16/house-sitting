@@ -1,0 +1,80 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const house = {
+  wifi: {
+    network: "small-internet",
+    password: "BodieQuill16!",
+  },
+  notes: [
+    {
+      title: "Thermostat",
+      text: "Leave it around 71°F — if you need to change it open the lid, hit SET and then up and down arrows to adjust. Then give it a second to register.",
+    },
+    {
+      title: "Trash (Grey) & Recycling (Blue)",
+      text: "Bins should be by the curb, because Thurs is garbage day and I probably put them out first thing in the morning I hope. Harry Potter lightning bolt in white on the backs of the bins. Fresh garbage bags under sink right side.",
+    },
+    {
+      title: "Parking",
+      text: "Park wherever's easy — driveway or street, both are fine overnight.",
+    },
+  ],
+};
+---
+
+<Layout title="House Stuff" subtitle="Wifi, thermostat, trash day — the random little things.">
+  <h2 class="section-title"><i class="fa-solid fa-wifi"></i> Wifi</h2>
+  <div class="card wifi">
+    <div>
+      <span class="label">Network</span>
+      <span class="value">{house.wifi.network}</span>
+    </div>
+    <div>
+      <span class="label">Password</span>
+      <span class="value">{house.wifi.password}</span>
+    </div>
+  </div>
+
+  <h2 class="section-title"><i class="fa-solid fa-house"></i> Around the House</h2>
+  {
+    house.notes.map((note) => (
+      <div class="card note">
+        <h3>{note.title}</h3>
+        <p>{note.text}</p>
+      </div>
+    ))
+  }
+</Layout>
+
+<style>
+  .wifi {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .wifi .label {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    font-weight: 700;
+  }
+
+  .wifi .value {
+    font-size: 1.25rem;
+    font-weight: 800;
+    font-family: "Consolas", monospace;
+  }
+
+  .note h3 {
+    margin: 0 0 0.25rem;
+  }
+
+  .note p {
+    margin: 0;
+    color: var(--muted);
+  }
+</style>

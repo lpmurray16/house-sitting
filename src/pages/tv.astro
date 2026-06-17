@@ -1,0 +1,124 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const tv = {
+  intro:
+    "The TV's a little fussy sometimes so I hope I cover everything here",
+  remotes:
+    "One Remote - Looks like this",
+  remoteButtons: [
+    { num: 1, label: "power on and off" },
+    { num: 2, label: "settings" },
+    { num: 3, label: "back" },
+    { num: 4, label: "home (also turns on the TV if it's off)" },
+    { num: 5, label: "volume up and down (hit both at the same time for mute)" },
+  ],
+  steps: [
+    "Hit the red power button on the black remote to turn the TV on or home button.",
+    "Wait for the TV to come on, then the light of the sound bar to come on.",
+    "Home button will take you to the home screen, holding it down will bring you to ALL apps, double tap will open the currently OPEN apps.",
+    "the OnStream app is your best bet to watch ANYTHING you want.",
+    "I think that's it, but if you're stuck, just text us.",
+  ],
+  logins:
+    "Everything should be logged in already, but if not, just text us and we'll help you out.",
+  troubleshooting: [
+    "Apps acting weird? Double tap the home button and 'exit' the app, try again.",
+    "No sound? Hit the settings button. Go to Reboot, then confirm. Wait a minute or two.",
+    "Totally frozen? Call us.",
+  ],
+};
+---
+
+<Layout title="Using the TV" subtitle="Because the remote situation is genuinely confusing. Sorry.">
+  <div class="card">
+    <p>{tv.intro}</p>
+  </div>
+
+  <h2 class="section-title"><i class="fa-solid fa-sliders"></i> The Remote</h2>
+  <div class="card">
+    <p>{tv.remotes}</p>
+    <img class="remote-img" src="/remote.png" alt="The TV remote with numbered buttons" />
+    <ol class="remote-legend">
+      {
+        tv.remoteButtons.map((btn) => (
+          <li>
+            <span class="btn-num">{btn.num}</span>
+            <span class="btn-label">{btn.label}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+
+  <h2 class="section-title"><i class="fa-solid fa-list-ol"></i> Step by Step</h2>
+  <div class="card">
+    <ol class="steps">
+      {tv.steps.map((step) => <li>{step}</li>)}
+    </ol>
+  </div>
+
+  <h2 class="section-title"><i class="fa-solid fa-lock"></i> Logins</h2>
+  <div class="card">
+    <p>{tv.logins}</p>
+  </div>
+
+  <h2 class="section-title"><i class="fa-solid fa-screwdriver-wrench"></i> Troubleshooting</h2>
+  <div class="card">
+    <ul class="clean">
+      {tv.troubleshooting.map((tip) => <li>{tip}</li>)}
+    </ul>
+  </div>
+</Layout>
+
+<style>
+  .card p {
+    margin: 0;
+  }
+
+  .remote-img {
+    display: block;
+    max-width: 220px;
+    width: 100%;
+    height: auto;
+    margin: 1rem auto;
+    border-radius: var(--radius);
+  }
+
+  .remote-legend {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .remote-legend li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .btn-num {
+    flex-shrink: 0;
+    width: 1.6rem;
+    height: 1.6rem;
+    display: grid;
+    place-items: center;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 0.85rem;
+  }
+
+  ol.steps {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  ol.steps li {
+    padding: 0.4rem 0;
+    font-size: 1.02rem;
+  }
+</style>

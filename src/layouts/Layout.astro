@@ -1,0 +1,260 @@
+---
+const { title, subtitle } = Astro.props;
+
+const navItems = [
+  { href: "/", icon: "fa-paw", label: "Schedule" },
+  { href: "/tv", icon: "fa-tv", label: "The TV" },
+  { href: "/house", icon: "fa-house", label: "House Stuff" },
+  { href: "/emergency", icon: "fa-triangle-exclamation", label: "Just In Case" },
+];
+
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌶️%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      referrerpolicy="no-referrer"
+    />
+    <title>{title} · House Sitting Guide</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="/" class="brand"><i class="fa-solid fa-pepper-hot pepper"></i> House Sitting Guide</a>
+      <nav>
+        {
+          navItems.map((item) => {
+            const itemPath = item.href.replace(/\/$/, "") || "/";
+            const isActive = pathname === itemPath;
+            return (
+              <a href={item.href} class={isActive ? "active" : ""}>
+                <i class={`fa-solid ${item.icon}`} /> {item.label}
+              </a>
+            );
+          })
+        }
+      </nav>
+    </header>
+
+    <main>
+      <div class="page-heading">
+        <h1>{title}</h1>
+        {subtitle && <p class="subtitle">{subtitle}</p>}
+      </div>
+      <slot />
+    </main>
+
+    <footer>
+      <p><i class="fa-solid fa-pepper-hot"></i> Thanks for holding down the fort, fam! <i class="fa-solid fa-pepper-hot"></i></p>
+    </footer>
+
+    <style is:global>
+      :root {
+        --bg: #15120f;
+        --card: #211c19;
+        --ink: #f3ede7;
+        --muted: #a39a92;
+        --accent: #ff3b52;
+        --accent-dark: #c20020;
+        --green: #3fae50;
+        --gold: #f2a900;
+        --black: #0c0a09;
+        --border: #362e29;
+        --shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+        --radius: 14px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Montserrat", system-ui, -apple-system, sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      h1,
+      h2,
+      h3,
+      .brand,
+      .section-title {
+        font-family: "Anton", "Montserrat", sans-serif;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        line-height: 1.05;
+      }
+
+      .site-header {
+        background: var(--black);
+        border-bottom: 4px solid var(--accent);
+        padding: 0.85rem 1.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .brand {
+        font-size: 1.5rem;
+        text-decoration: none;
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .brand .pepper {
+        font-family: "Montserrat", sans-serif;
+        transform: rotate(-12deg);
+        display: inline-block;
+      }
+
+      .site-header nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+
+      .site-header nav a {
+        text-decoration: none;
+        color: #f3ede7;
+        padding: 0.4rem 0.9rem;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        transition: all 0.15s ease;
+      }
+
+      .site-header nav a:hover {
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+      }
+
+      .site-header nav a.active {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      main {
+        width: 100%;
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 2rem 1.25rem 3rem;
+        flex: 1;
+      }
+
+      .page-heading {
+        margin-bottom: 1.75rem;
+        background: var(--accent);
+        color: #fff;
+        padding: 1.5rem 1.75rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        border-bottom: 5px solid var(--accent-dark);
+      }
+
+      .page-heading h1 {
+        font-size: 2.6rem;
+        margin: 0 0 0.25rem;
+        color: #fff;
+      }
+
+      .subtitle {
+        color: rgba(255, 255, 255, 0.92);
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-left: 5px solid var(--accent);
+        border-radius: var(--radius);
+        padding: 1.25rem 1.5rem;
+        box-shadow: var(--shadow);
+        margin-bottom: 1.25rem;
+      }
+
+      .card h2 {
+        margin-top: 0;
+        font-size: 1.5rem;
+      }
+
+      .section-title {
+        font-size: 1.7rem;
+        color: var(--accent);
+        margin: 2.25rem 0 0.85rem;
+      }
+
+      ul.clean {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      ul.clean li {
+        padding: 0.5rem 0;
+        border-bottom: 1px dashed var(--border);
+      }
+
+      ul.clean li:last-child {
+        border-bottom: none;
+      }
+
+      footer {
+        text-align: center;
+        padding: 1.5rem;
+        color: #f3ede7;
+        background: var(--black);
+        border-top: 4px solid var(--accent);
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      @media (max-width: 600px) {
+        .site-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .page-heading h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </body>
+</html>
